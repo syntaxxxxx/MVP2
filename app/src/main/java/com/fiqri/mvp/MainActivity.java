@@ -2,25 +2,28 @@ package com.fiqri.mvp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements ViewLogin{
+public class MainActivity extends AppCompatActivity implements MainView {
 
-    @BindView(R.id.usrName)
-    EditText usrName;
-    @BindView(R.id.usrPassword)
-    EditText usrPassword;
-    @BindView(R.id.btnSignup)
-    Button btnSignup;
+    @BindView(R.id.inputan_a)
+    EditText inputanA;
+    @BindView(R.id.inputan_b)
+    EditText inputanB;
+    @BindView(R.id.tv_result)
+    TextView tvResult;
+    @BindView(R.id.btn_calculate)
+    Button btnCalculate;
 
-    LoginPresenter presenter;
+    MainPresenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,42 +31,51 @@ public class MainActivity extends AppCompatActivity implements ViewLogin{
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        iniPresenter();
-        onAttach();
+        initPresenter();
+        onAttachView();
     }
 
-
-    private void iniPresenter() {
-        presenter = new LoginPresenter();
+    private void initPresenter() {
+        presenter = new MainPresenter();
 
     }
 
-    @OnClick(R.id.btnSignup)
+    @OnClick(R.id.btn_calculate)
     public void onViewClicked() {
-        presenter.login(usrName, usrPassword);
+        presenter.calculate(inputanA, inputanB);
     }
 
     @Override
-    public void onAttach() {
+    public void onAttachView() {
         presenter.onAttach(this);
 
     }
 
     @Override
-    public void onDetach() {
+    public void onDetachView() {
         presenter.onDetach();
 
     }
 
     @Override
-    public void Success() {
-        Toast.makeText(this, "Berhasil", Toast.LENGTH_SHORT).show();
-
+    public void Success(String result) {
+        tvResult.setText(result);
     }
 
     @Override
     public void Error() {
-        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        onAttachView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        onDetachView();
     }
 }

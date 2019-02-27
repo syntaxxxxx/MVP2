@@ -8,22 +8,33 @@
     android:padding="10dp"
     tools:context="com.fiqri.mvp.MainActivity">
 
-<EditText
-    android:id="@+id/usrName"
-    android:hint="Username"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/inputan_a"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Inputan A" />
 
     <EditText
-        android:id="@+id/usrPassword"
-        android:hint="Password"
+        android:id="@+id/inputan_b"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Inputan B" />
 
     <Button
-        android:id="@+id/btnSignup"
-        android:text="Sign Up"
+        android:id="@+id/btn_calculate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Calculate" />
+
+    <TextView
+        android:id="@+id/tv_result"
+        android:textSize="26sp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Result" />
 
 </LinearLayout>
