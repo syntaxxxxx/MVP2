@@ -14,24 +14,17 @@ public class MainPresenter implements BasePresenter<MainView> {
 
     @Override
     public void onAttach(MainView view) {
-         mainView = view;
+        mainView = view;
     }
 
-    void calculate(EditText edtA, EditText edtB) {
+    public double calculate(double inputanA, double inputanB) {
+        return inputanA * inputanB;
+    }
 
-        String inputanA = edtA.getText().toString().trim();
-        String inputanB = edtB.getText().toString().trim();
-
-        if (inputanA.isEmpty() || inputanB.isEmpty()) {
-            mainView.Error();
-
-        } else {
-            double valueA = Double.parseDouble(inputanA);
-            double valueB = Double.parseDouble(inputanB);
-            double result = valueA * valueB;
-            String tampung = String.valueOf(result);
-            mainView.Success(tampung);
-        }
+    void calculateResult(double inputanA, double inputanB) {
+        double total = calculate(inputanA, inputanB);
+        String tampung = String.valueOf(total);
+        mainView.Success(tampung);
     }
 
     @Override

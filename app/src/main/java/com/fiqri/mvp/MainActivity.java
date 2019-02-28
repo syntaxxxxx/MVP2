@@ -14,9 +14,9 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity implements MainView {
 
     @BindView(R.id.inputan_a)
-    EditText inputanA;
+    EditText edtA;
     @BindView(R.id.inputan_b)
-    EditText inputanB;
+    EditText edtB;
     @BindView(R.id.tv_result)
     TextView tvResult;
     @BindView(R.id.btn_calculate)
@@ -42,7 +42,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @OnClick(R.id.btn_calculate)
     public void onViewClicked() {
-        presenter.calculate(inputanA, inputanB);
+
+        String tampungA = edtA.getText().toString();
+        String tampungB = edtB.getText().toString();
+
+        if (tampungA.isEmpty() || tampungB.isEmpty()) {
+            Error();
+
+        } else {
+            double a = Double.parseDouble(tampungA);
+            double b = Double.parseDouble(tampungB);
+            presenter.calculateResult(a, b);
+        }
     }
 
     @Override
